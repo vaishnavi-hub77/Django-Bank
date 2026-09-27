@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOB | Fund Transfer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #004a99;
+            --bg-color: #f0f4f8;
+            --white: #ffffff;
+            --text-dark: #333;
+            --accent: #ff6600;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 8%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .transfer-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+        }
+
+        /* Message Styling */
+        .msg-box {
+            background-color: #fff4f0;
+            border-left: 4px solid var(--accent);
+            padding: 12px;
+            margin-bottom: 25px;
+            color: #c2410c;
+            font-size: 0.9rem;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        /* Form Layout */
+        .transfer-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .arrow-divider {
+            color: #cbd5e1;
+            font-size: 24px;
+            padding-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 74, 153, 0.1);
+        }
+
+        .transfer-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .transfer-btn:hover {
+            background-color: #003366;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 74, 153, 0.2);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">BOB</a>
+        <div style="font-size: 0.8rem; opacity: 0.8;">Transfer Portal</div>
+    </header>
+
+    <div class="container">
+        <div class="transfer-card">
+            <h2>Instant Fund Transfer</h2>
+
+            {% if msg %}
+            <div class="msg-box">{{ msg }}</div>
+            {% endif %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+                
+                <!-- Account Numbers Row -->
+                <div class="transfer-flow">
+                    <div class="form-group">
+                        <label>From Account</label>
+                        <input type="number" name="from_acc" placeholder="Your A/C" required>
+                    </div>
+                    <div class="arrow-divider">→</div>
+                    <div class="form-group">
+                        <label>To Account</label>
+                        <input type="number" name="to_acc" placeholder="Receiver A/C" required>
+                    </div>
+                </div>
+
+                <!-- Verification Info -->
+                <div class="form-group">
+                    <label>Registered Mobile Number</label>
+                    <input type="tel" name="phone" placeholder="Enter mobile for OTP" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Registered Email</label>
+                    <input type="email" name="email" placeholder="example@mail.com" required>
+                </div>
+
+                <button type="submit" class="transfer-btn">PROCEED TO VERIFY</button>
+            </form>
+
+            <a href="/"class="back-link">← Cancel Transaction</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 BOB Secure. OTP will be sent to your registered contact details.
+    </footer>
+
+</body>
+</html>

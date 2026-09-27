@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOB | Final Deletion Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #004a99;
+            --danger-color: #e11d48;
+            --bg-color: #fff1f2;
+            --white: #ffffff;
+            --text-main: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 8%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .security-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(225, 29, 72, 0.1);
+            text-align: center;
+            border-top: 5px solid var(--danger-color);
+        }
+
+        .alert-icon {
+            width: 64px;
+            height: 64px;
+            background: #ffe4e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--danger-color);
+        }
+
+        h2 {
+            color: var(--text-main);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        p.warning {
+            color: #64748b;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .otp-group {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f1f5f9;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            text-align: center;
+            letter-spacing: 12px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="password"]:focus {
+            border-color: var(--danger-color);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.1);
+        }
+
+        .final-btn {
+            width: 100%;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .final-btn:hover {
+            background-color: #be123c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(225, 29, 72, 0.3);
+        }
+
+        .cancel-link {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .cancel-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">BOB</a>
+        <div style="font-size: 0.8rem;">Final Verification</div>
+    </header>
+
+    <div class="container">
+        <div class="security-card">
+            <div class="alert-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            
+            <h2>Authorize Deletion</h2>
+            <p class="warning">We've sent a 6-digit code to your email. Enter it below to permanently close your account.</p>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                
+                <div class="otp-group">
+                    <label for="otp">Enter Verification OTP</label>
+                    <input type="password" name="otp" id="otp" placeholder="••••••" required maxlength="6" inputmode="numeric">
+                </div>
+
+                <button type="submit" class="final-btn">CONFIRM & DELETE ACCOUNT</button>
+            </form>
+
+            <a href="/" class="cancel-link">Stop process and return home</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 BOB Secure. Identity verification is required for all closures.
+    </footer>
+
+</body>
+</html>

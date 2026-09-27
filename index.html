@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOB | Online Banking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #004a99; /* BOB Blue */
+            --accent-color: #ff6600;  /* BOB Orange accent if needed */
+            --bg-color: #f0f4f8;
+            --white: #ffffff;
+            --text-main: #333;
+            --shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .user-info {
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #004a99 0%, #0066cc 100%);
+            height: 150px; /* Reduced height */
+            text-align: center;
+            color: white;
+            padding-top: 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Container & Grid */
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto 50px; /* Positive margin pushes cards down */
+            padding: 0 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        /* Card Design */
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 4px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* FIX: This wrapper keeps all icons looking the same size */
+        .icon-box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-box img {
+            max-width: 80px;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 0.85rem;
+            color: #777;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">BOB</div>
+        <div class="user-info">
+            Welcome, User | <a href="#" class="logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Online Banking Portal</h1>
+        <p>Your secure gateway to smart banking</p>
+    </section>
+
+    <div class="main-container">
+        <div class="services-grid">
+            
+            <a href="{% url 'create' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/1.png' %}" alt=""></div>
+                <h3>Open Account</h3>
+                <p>Start your financial journey with a new account.</p>
+            </a>
+
+            <a href="{% url 'pin' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/2.png' %}" alt=""></div>
+                <h3>Manage PIN</h3>
+                <p>Change or reset your secure access PIN.</p>
+            </a>
+
+            <a href="{% url 'balance' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/3.png' %}" alt=""></div>
+                <h3>Check Balance</h3>
+                <p>View your real-time account statement.</p>
+            </a>
+
+            <a href="{% url 'withdrawn' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/4.png' %}" alt=""></div>
+                <h3>Withdraw Cash</h3>
+                <p>Quick and easy fund withdrawals.</p>
+            </a>
+
+            <a href="{% url 'deposite' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/5.png' %}" alt=""></div>
+                <h3>Deposit Money</h3>
+                <p>Add funds to your account instantly.</p>
+            </a>
+
+            <a href="{% url 'transfer' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/6.png' %}" alt=""></div>
+                <h3>Transaction</h3>
+                <p>Amount Transfer from one account to another.</p>
+            </a>
+
+            <a href="{% url 'delete' %}" class="card">
+                <div class="icon-box"><img src="{% static 'images/7.jpg' %}" alt=""></div>
+                <h3>Help & Support</h3>
+                <p>Get assistance from our experts 24/7.</p>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 BOB - Bank of Baroda Project. Secured by 256-bit Encryption.
+    </footer>
+
+</body>
+</html>

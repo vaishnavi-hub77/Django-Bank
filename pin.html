@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOB | Generate Secure PIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #004a99; /* BOB Blue */
+            --bg-color: #f0f4f8;
+            --white: #ffffff;
+            --text-dark: #333;
+            --accent-orange: #ff6600;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Standard BOB Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 8%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Form Center Alignment */
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .pin-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        /* Icon styling */
+        .security-icon {
+            width: 70px;
+            height: 70px;
+            background: #eef4ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .security-icon svg {
+            fill: var(--primary-color);
+            width: 35px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* Form Elements */
+        .form-group {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        input[type="number"]:focus {
+            border-color: var(--primary-color);
+            background-color: #f9fbff;
+        }
+
+        /* Chrome/Safari: Hide arrows in number input */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .otp-btn {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .otp-btn:hover {
+            background-color: #003366;
+            box-shadow: 0 5px 15px rgba(0, 74, 153, 0.3);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            text-decoration: none;
+            color: #888;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">BOB</a>
+        <div style="font-size: 0.8rem; opacity: 0.8;">Security Center</div>
+    </header>
+
+    <div class="container">
+        <div class="pin-card">
+            <div class="security-icon">
+                <!-- Shield/Lock Icon SVG -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+            </div>
+            
+            <h2>Generate PIN</h2>
+            <p>Enter your account number. We will send a One-Time Password (OTP) to your registered mobile number.</p>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="acc">Account Number</label>
+                    <input type="number" name="acc" id="acc" placeholder="e.g. 1000234567" required>
+                </div>
+
+                <button type="submit" class="otp-btn">GENERATE OTP</button>
+            </form>
+
+            <a href="/" class="back-link">Cancel and return</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 BOB Secure. Never share your OTP with anyone.
+    </footer>
+
+</body>
+</html>
